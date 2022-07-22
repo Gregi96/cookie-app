@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon } from 'components'
+import { Icon } from 'lib/components'
 import { SvgIcon } from 'lib/types'
 
 export const Bin: React.FunctionComponent<SvgIcon> = props => (

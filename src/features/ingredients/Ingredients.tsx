@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { Icons } from 'assets'
 import { useCookieStore, useTranslationStore } from 'lib/stores'
 import { Title } from 'lib/styles'
-import { Input } from './Input'
-import { IconButton } from './IconButton'
+import { Input, IconButton } from 'lib/components'
 
 export const Ingredients: React.FunctionComponent = () => {
     const [ingredientValue, setIngredientValue] = useState('')

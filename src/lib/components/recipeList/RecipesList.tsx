@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import { Icons } from 'assets'
 import { AddRecipeProps, useTranslationStore } from 'lib/stores'
-import { IconButton } from './IconButton'
+import { IconButton } from 'lib/components'
 
 type RecipeListProps = {
     recipes: Array<AddRecipeProps>,
@@ -16,7 +16,7 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({
     const { T } = useTranslationStore()
 
     return (
-        <div>
+        <Fragment>
             {recipes.map((recipe, index) => (
                 <Recipe key={index}>
                     <RecipeName>
@@ -45,7 +45,7 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({
                     </RemoveRecipeWrapper>
                 </Recipe>
             ))}
-        </div>
+        </Fragment>
     )
 }
 

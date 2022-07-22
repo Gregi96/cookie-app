@@ -2,7 +2,7 @@ import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import { LocalStorageKey } from 'lib/types'
 
-export type AddRecipeProps = {
+export interface AddRecipeProps {
     recipeName: string,
     ingredients: Array<string>
 }

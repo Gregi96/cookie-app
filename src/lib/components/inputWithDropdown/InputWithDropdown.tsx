@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Input } from './Input'
+import { Input } from 'lib/components'
 
 type InputWithDropdownProps = {
     options: Array<string>,

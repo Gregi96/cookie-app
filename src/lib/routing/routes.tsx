@@ -1,5 +1,7 @@
 import React from 'react'
-import { Dishes, Ingredients, Recipes } from 'components'
+import { Ingredients } from 'features/ingredients'
+import { Recipes } from 'features/recipes'
+import { Dishes } from 'features/dishes'
 import { ScreenNames } from './screenNames'
 
 type Route = {

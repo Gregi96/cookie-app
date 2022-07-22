@@ -14,23 +14,27 @@ export const BadgeList: React.FunctionComponent<BadgeListProps> = ({
     removeBadge
 }) => (
     <Fragment>
-        <Title>
-            {title}
-        </Title>
-        <BadgeContainer>
-            {items.map(ingredient => (
-                <Badge key={ingredient}>
-                    {ingredient}
-                    <RemoveIcon>
-                        <Icons.Close
-                            onClick={() => removeBadge(ingredient)}
-                            width={15}
-                            height={15}
-                        />
-                    </RemoveIcon>
-                </Badge>
-            ))}
-        </BadgeContainer>
+        {Boolean(items.length) && (
+            <Fragment>
+                <Title>
+                    {title}
+                </Title>
+                <BadgeContainer>
+                    {items.map(ingredient => (
+                        <Badge key={ingredient}>
+                            {ingredient}
+                            <RemoveIcon>
+                                <Icons.Close
+                                    onClick={() => removeBadge(ingredient)}
+                                    width={15}
+                                    height={15}
+                                />
+                            </RemoveIcon>
+                        </Badge>
+                    ))}
+                </BadgeContainer>
+            </Fragment>
+        )}
     </Fragment>
 )
 

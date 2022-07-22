@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme } from 'lib/styles'
-import { ScreenLayout } from 'components/ScreenLayout'
+import { ScreenLayout } from 'lib/components/ScreenLayout'
 
 export const App = () => (
     <ThemeProvider theme={theme}>
