@@ -32,6 +32,6 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
 )
 
 const ButtonContainer = styled.button<ButtonStyles>`
-  color: ${({ theme, textColor }) => textColor ? textColor : theme.colors.black};
-  background-color: ${({ theme, backgroundColor }) => backgroundColor ? backgroundColor : theme.colors.white};
+    color: ${({ theme, textColor }) => textColor ? textColor : theme.colors.black};
+    background-color: ${({ theme, backgroundColor }) => backgroundColor ? backgroundColor : theme.colors.white};
 `

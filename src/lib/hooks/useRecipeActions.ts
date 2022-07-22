@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useCookieStore } from 'lib/stores'
 
 export const useRecipeActions = () => {
@@ -8,7 +8,7 @@ export const useRecipeActions = () => {
 
     const addIngredient = (item: string) => {
         setSelectedIngredients(prev => [...prev, item])
-        setOptions(prev => prev.filter((ingredient => ingredient !== item)))
+        setOptions(prev => prev.filter(ingredient => ingredient !== item))
     }
 
     const removeIngredient = (item: string) => {
@@ -21,6 +21,7 @@ export const useRecipeActions = () => {
             recipeName,
             ingredients: selectedIngredients
         })
+        setOptions(ingredients)
         setSelectedIngredients([])
     }
 

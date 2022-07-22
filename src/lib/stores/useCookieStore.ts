@@ -1,13 +1,14 @@
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
+import { LocalStorageKey } from 'lib/types'
 
 export type AddRecipeProps = {
     recipeName: string,
     ingredients: Array<string>
 }
 
-const ingredientsAtom = atomWithStorage<Array<string>>('ingredients', [])
-const recipesAtom = atomWithStorage<Array<AddRecipeProps>>('recipes', [])
+const ingredientsAtom = atomWithStorage<Array<string>>(LocalStorageKey.Ingredients, [])
+const recipesAtom = atomWithStorage<Array<AddRecipeProps>>(LocalStorageKey.Recipes, [])
 
 export const useCookieStore = () => {
     const [ ingredients, setIngredients ] = useAtom(ingredientsAtom)
@@ -15,16 +16,12 @@ export const useCookieStore = () => {
 
     const addIngredient = (ingredient: string) => setIngredients(prev => [...prev, ingredient])
 
-    const removeIngredient = (ingredient: string) => setIngredients(prev => prev
-        .filter(ingredientInStore => ingredientInStore !== ingredient))
+    const removeIngredient = (ingredient: string) => setIngredients(prev => prev.filter(ingredientInStore => ingredientInStore !== ingredient))
 
-    const addRecipe = ({ recipeName, ingredients } : AddRecipeProps) => setRecipes(prev => [
-        ...prev,
-        {
-            recipeName,
-            ingredients
-        }
-    ])
+    const addRecipe = ({ recipeName, ingredients } : AddRecipeProps) => setRecipes(prev => prev.concat({
+        recipeName,
+        ingredients
+    }))
 
     const removeRecipe = (recipeName: string) => setRecipes(prev => prev.filter(recipe => recipe.recipeName !== recipeName))
 

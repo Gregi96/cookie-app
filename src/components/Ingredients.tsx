@@ -27,26 +27,30 @@ export const Ingredients: React.FunctionComponent = () => {
                     onChange={setIngredientValue}
                     placeholder={T.addIngredientPlaceholder}
                 />
-                <IconButton icon={
-                    <Icons.Plus
-                        pointer
-                        height={30}
-                        width={30}
-                        onClick={handleAddIngredient}
-                    />
-                }/>
+                <IconButton
+                    icon={(
+                        <Icons.Plus
+                            pointer
+                            height={30}
+                            width={30}
+                            onClick={handleAddIngredient}
+                        />
+                    )}
+                />
             </AddContainer>
             <div>
                 {ingredients.map(ingredient => (
                     <Ingredient key={ingredient}>
                         {ingredient}
-                        <IconButton icon={
-                            <Icons.Bin
-                                width={24}
-                                height={24}
-                                onClick={() => removeIngredient(ingredient)}
-                            />
-                        }/>
+                        <IconButton
+                            icon={(
+                                <Icons.Bin
+                                    width={24}
+                                    height={24}
+                                    onClick={() => removeIngredient(ingredient)}
+                                />
+                            )}
+                        />
                     </Ingredient>
                 ))}
             </div>
