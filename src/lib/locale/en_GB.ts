@@ -8,5 +8,6 @@ export const en_GB: Dictionary = {
     nameOfRecipe: 'Name of Recipe',
     selectedIngredients: 'Selected ingredients',
     searchIngredients: 'Search ingredients',
-    dishes: 'Dishes'
+    dishes: 'Dishes',
+    add: 'Add'
 }

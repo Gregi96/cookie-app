@@ -2,42 +2,37 @@ import { useRef, useState } from 'react'
 import { useCookieStore } from 'lib/stores'
 
 export const useRecipeActions = () => {
-    const { ingredients, addRecipe, recipes } = useCookieStore()
-    const [recipeName, setRecipeName] = useState('')
-    const optionsRef = useRef<Array<string>>(ingredients)
+    const { ingredients, addRecipe, recipes, removeRecipe } = useCookieStore()
     const [selectedIngredients, setSelectedIngredients] = useState<Array<string>>([])
+    const [options, setOptions] = useState<Array<string>>(ingredients)
 
     const addIngredient = (item: string) => {
         setSelectedIngredients(prev => [...prev, item])
-
-        optionsRef.current = optionsRef.current.filter((ingredient => ingredient !== item))
+        setOptions(prev => prev.filter((ingredient => ingredient !== item)))
     }
 
     const removeIngredient = (item: string) => {
         setSelectedIngredients(prev => prev.filter(ingredient => ingredient !== item))
-
-        optionsRef.current = optionsRef.current.concat(item)
+        setOptions(prev => prev.concat(item))
     }
 
-    const addNewRecipe = () => {
+    const addNewRecipe = (recipeName: string) => {
         addRecipe({
             recipeName,
             ingredients: selectedIngredients
         })
-        setRecipeName('')
         setSelectedIngredients([])
-
-        optionsRef.current = ingredients
     }
 
+    const deleteRecipe = (recipeName: string) => removeRecipe(recipeName)
+
     return {
-        recipeName,
-        setRecipeName,
-        optionsRef,
         addIngredient,
         removeIngredient,
         selectedIngredients,
         addNewRecipe,
-        recipes
+        recipes,
+        options,
+        deleteRecipe
     }
 }

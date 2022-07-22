@@ -3,15 +3,17 @@ import styled from 'styled-components'
 import { Icons } from 'assets'
 import { useCookieStore, useTranslationStore } from 'lib/stores'
 import { Title } from 'lib/styles'
+import { Input } from './Input'
+import { IconButton } from './IconButton'
 
 export const Ingredients: React.FunctionComponent = () => {
-    const [inputValue, setInputValue] = useState('')
+    const [ingredientValue, setIngredientValue] = useState('')
     const { ingredients, removeIngredient, addIngredient } = useCookieStore()
     const { T } = useTranslationStore()
 
     const handleAddIngredient = () => {
-        addIngredient(inputValue)
-        setInputValue('')
+        addIngredient(ingredientValue)
+        setIngredientValue('')
     }
 
     return (
@@ -20,24 +22,31 @@ export const Ingredients: React.FunctionComponent = () => {
                 {T.ingredients}
             </Title>
             <AddContainer>
-                <input
-                    value={inputValue}
-                    onChange={event => setInputValue(event.target.value)}
+                <Input
+                    value={ingredientValue}
+                    onChange={setIngredientValue}
                     placeholder={T.addIngredientPlaceholder}
                 />
-                <button onClick={handleAddIngredient}>
-                    +
-                </button>
+                <IconButton icon={
+                    <Icons.Plus
+                        pointer
+                        height={30}
+                        width={30}
+                        onClick={handleAddIngredient}
+                    />
+                }/>
             </AddContainer>
             <div>
                 {ingredients.map(ingredient => (
-                    <Ingredient
-                        key={ingredient}
-                    >
+                    <Ingredient key={ingredient}>
                         {ingredient}
-                        <RemoveButton onClick={() => removeIngredient(ingredient)}>
-                            <Icons.Bin/>
-                        </RemoveButton>
+                        <IconButton icon={
+                            <Icons.Bin
+                                width={24}
+                                height={24}
+                                onClick={() => removeIngredient(ingredient)}
+                            />
+                        }/>
                     </Ingredient>
                 ))}
             </div>
@@ -86,13 +95,4 @@ const Ingredient = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.brown};
   margin-bottom: 10px;
   color: ${({ theme }) => theme.colors.darkgray};
-`
-
-const RemoveButton = styled.div`
-  background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.brown};
-  cursor: pointer;
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.brown};
-  }
 `

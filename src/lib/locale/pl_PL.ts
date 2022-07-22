@@ -8,5 +8,6 @@ export const pl_PL: Dictionary = {
     nameOfRecipe: 'Nazwa skladnika',
     selectedIngredients: 'Wybrane skladniki',
     searchIngredients: 'Wyszukaj skladniki',
-    dishes: 'Dania'
+    dishes: 'Dania',
+    add: 'Dodaj'
 }

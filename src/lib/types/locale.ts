@@ -6,5 +6,6 @@ export type Dictionary = {
     nameOfRecipe: string,
     selectedIngredients: string,
     searchIngredients: string,
-    dishes: string
+    dishes: string,
+    add: string
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslationStore } from 'lib/stores'
 import { Title } from 'lib/styles'
@@ -6,17 +6,19 @@ import { useRecipeActions } from 'lib/hooks'
 import { BadgeList } from './BadgeList'
 import { RecipesList } from './RecipesList'
 import { InputWithDropdown } from './InputWithDropdown'
+import { Button } from './Button'
 
 export const Recipes: React.FunctionComponent = () => {
     const { T } = useTranslationStore()
-    const { recipeName,
-        setRecipeName,
-        optionsRef,
+    const [recipeName, setRecipeName] = useState('')
+    const {
         addIngredient,
         removeIngredient,
         selectedIngredients,
         addNewRecipe,
-        recipes
+        recipes,
+        options,
+        deleteRecipe
     } = useRecipeActions()
 
     return (
@@ -34,9 +36,13 @@ export const Recipes: React.FunctionComponent = () => {
                                 onChange={event => setRecipeName(event.target.value)}
                             />
                             {selectedIngredients.length > 0 && recipeName.length > 0 && (
-                                <button onClick={addNewRecipe}>
-                                    Add
-                                </button>
+                                <Button
+                                    onClick={() => {
+                                        addNewRecipe(recipeName)
+                                        setRecipeName('')
+                                    }}
+                                    content={T.add}
+                                />
                             )}
                         </InputWithButton>
                     </Label>
@@ -44,20 +50,23 @@ export const Recipes: React.FunctionComponent = () => {
                         <BadgeList
                             items={selectedIngredients}
                             title={T.selectedIngredients}
-                            removeBadge={item => removeIngredient(item)}
+                            removeBadge={removeIngredient}
                         />
                     )}
                 </LeftContainer>
                 <RightContainer>
                     {T.searchIngredients}
                     <InputWithDropdown
-                        optionsRef={optionsRef}
-                        selectOption={item => addIngredient(item)}
+                        options={options}
+                        selectOption={addIngredient}
                     />
                 </RightContainer>
             </Container>
             {recipes.length > 0 && (
-                <RecipesList recipes={recipes}/>
+                <RecipesList
+                    recipes={recipes}
+                    removeRecipe={deleteRecipe}
+                />
             )}
         </div>
     )

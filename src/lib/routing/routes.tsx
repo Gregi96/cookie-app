@@ -1,6 +1,6 @@
 import React from 'react'
-import { ScreenNames } from './screenNames'
 import { Dishes, Ingredients, Recipes } from 'components'
+import { ScreenNames } from './screenNames'
 
 type Route = {
     path: ScreenNames,

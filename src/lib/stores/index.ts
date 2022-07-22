@@ -1,2 +1,2 @@
-export { useCookieStore } from './useCookieStore'
+export  *  from './useCookieStore'
 export { useTranslationStore } from './useTranslationStore'

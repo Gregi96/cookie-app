@@ -1,59 +1,46 @@
-import React, { useEffect, useState } from 'react'
-import { debounceTime, Subject } from 'rxjs'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
-const inputChange = new Subject<string>()
+import { Input } from './Input'
 
 type InputWithDropdownProps = {
-    optionsRef: React.MutableRefObject<Array<string>>,
+    options: Array<string>,
     selectOption(item: string): void
 }
 
 export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> = ({
     selectOption,
-    optionsRef
+    options
 }) => {
     const [dropdownOption, setDropdownOption] = useState<Array<string>>([])
-    const [inputValue, setInputValue] = useState('')
+    const [ingredientValue, setIngredientValue] = useState('')
 
-    useEffect(() => {
-        const subscription = inputChange
-            .pipe(debounceTime(500))
-            .subscribe(value => {
-                if (value === '') {
-                    return setDropdownOption([])
-                }
+    const filterDropdownOption = (value: string) => {
+        if (value === '') {
+            return setDropdownOption([])
+        }
 
-                const filteredValue = optionsRef.current.filter(ingredient => ingredient.includes(value))
+        const filteredValue = options.filter(ingredient => ingredient.includes(value))
 
-                setDropdownOption(filteredValue)
-            })
-
-        return () => subscription.unsubscribe()
-    }, [])
-
-    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        inputChange.next(event.target.value)
+        setIngredientValue(value)
+        setDropdownOption(filteredValue)
     }
 
     return (
         <Container>
             <Input
-                value={inputValue}
-                onChange={event => {
-                    setInputValue(event.target.value)
-                    onInputChange(event)
-                }}
+                value={ingredientValue}
+                onChange={filterDropdownOption}
+                withDebounce
             />
             {dropdownOption.length > 0 && (
                 <Dropdown>
-                    {dropdownOption.map(((item, index) => (
+                    {dropdownOption.map((item => (
                         <DropdownItem
-                            key={index}
+                            key={item}
                             onClick={() => {
                                 selectOption(item)
                                 setDropdownOption([])
-                                setInputValue('')
+                                setIngredientValue('')
                             }}
                         >
                             {item}
@@ -79,7 +66,7 @@ const Container = styled.div`
     position: relative;
 `
 
-const Input = styled.input`
+const InputOld = styled.input`
     width: 100%;
     padding: 10px;
 `

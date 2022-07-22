@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import { ScreenNames } from 'lib/routing'
-import { useTranslationStore } from '../lib/stores'
+import { useTranslationStore } from 'lib/stores'
 
 type RouteLinkProps = {
     isActive: boolean
@@ -43,16 +43,16 @@ const TopMenuContainer = styled.div`
 `
 
 const RouteLink = styled(Link)`
-     text-decoration: none;
+    text-decoration: none;
 `
 
 const RouteWrapper = styled.div<RouteLinkProps>`
-  padding: 10px 20px;
-  text-decoration: none;
-  background-color: ${({ isActive }) => isActive ? 'brown' : 'bisque'};
-  font-weight: bold;
-  border-radius: 3px;
-  a {
-    color: ${({ isActive }) => isActive ? 'white' : 'darkgray'};
-  }
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: ${({ isActive, theme }) => isActive ? theme.colors.brown : theme.colors.bisque};
+    font-weight: bold;
+    border-radius: 3px;
+    a {
+        color: ${({ isActive, theme }) => isActive ? theme.colors.white : theme.colors.darkgray};
+    }
 `

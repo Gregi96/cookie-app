@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Icons } from 'assets'
 
 type BadgeListProps = {
-    items: Array<any>,
+    items: Array<string>,
     title: string,
     removeBadge(item: string): void
 }
@@ -18,14 +18,18 @@ export const BadgeList: React.FunctionComponent<BadgeListProps> = ({
             {title}
         </Title>
         <BadgeContainer>
-            {items.length > 0 && (items.map((ingredient, index) => (
+            {items.length > 0 && items.map((ingredient, index) => (
                 <Badge key={index}>
                     {ingredient}
-                    <RemoveIcon onClick={() => removeBadge(ingredient)}>
-                        <Icons.Close/>
+                    <RemoveIcon>
+                        <Icons.Close
+                            onClick={() => removeBadge(ingredient)}
+                            width={15}
+                            height={15}
+                        />
                     </RemoveIcon>
                 </Badge>
-            )))}
+            ))}
         </BadgeContainer>
     </Fragment>
 )
@@ -48,8 +52,6 @@ const Badge = styled.div`
 `
 
 const RemoveIcon = styled.div`
-    width: 20px;
-    height: 20px;
     position: absolute;
     right: 0;
     top: 0;
