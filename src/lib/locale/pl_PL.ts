@@ -10,6 +10,6 @@ export const pl_PL: Dictionary = {
     searchIngredients: 'Wyszukaj składniki',
     dishes: 'Dania',
     add: 'Dodaj',
-    searchedDishes: 'Co można zrobić z wybranymi składnikami:',
+    searchedDishes: 'Co mogę zrobić z wybranymi składnikami:',
     dishesWithoutOne: 'Co mogę zrobić z wybranymi składnikami oprócz jednego:'
 }
