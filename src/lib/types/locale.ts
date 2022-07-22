@@ -7,5 +7,7 @@ export type Dictionary = {
     selectedIngredients: string,
     searchIngredients: string,
     dishes: string,
-    add: string
+    add: string,
+    searchedDishes: string,
+    dishesWithoutOne: string
 }
