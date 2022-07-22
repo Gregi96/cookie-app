@@ -33,13 +33,15 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({
                         ))}
                     </Ingredients>
                     <RemoveRecipeWrapper>
-                        <IconButton icon={
-                            <Icons.Bin
-                                width={24}
-                                height={24}
-                                onClick={() => removeRecipe(recipe.recipeName)}
-                            />
-                        }/>
+                        <IconButton
+                            icon={(
+                                <Icons.Bin
+                                    width={24}
+                                    height={24}
+                                    onClick={() => removeRecipe(recipe.recipeName)}
+                                />
+                            )}
+                        />
                     </RemoveRecipeWrapper>
                 </Recipe>
             ))}
