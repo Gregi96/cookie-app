@@ -5,10 +5,7 @@ import { useRecipeActions } from 'lib/hooks'
 import { Title } from 'lib/styles'
 import { InputWithDropdown, BadgeList } from 'lib/components'
 import { dishesWithExactIngredientsHelper, dishesWithoutOneHelper } from './utils'
-
-type DishesWithoutOneIngredientProps = AddRecipeProps & {
-    missingIngredient: string
-}
+import { DishesWithoutOneIngredientProps } from './types'
 
 export const Dishes: React.FunctionComponent = () => {
     const { T } = useTranslationStore()

@@ -1,21 +1,19 @@
 import { AddRecipeProps } from 'lib/stores'
+import { DishesWithoutOneIngredientProps } from '../types'
 
 type DishesWithExactIngredientsProps = {
     recipes: Array<AddRecipeProps>,
     selectedIngredients: Array<string>
 }
 
-interface DishesWithoutOneIngredientProps extends  AddRecipeProps {
-    missingIngredient: string
-}
+export const dishesWithExactIngredientsHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) => recipes
+    .filter(recipe => recipe.ingredients
+        .every(ingredient => selectedIngredients
+            .includes(ingredient) && recipe.ingredients.length === selectedIngredients.length))
 
-export const dishesWithExactIngredientsHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) => recipes.filter(recipe => recipe.ingredients
-    .every(ingredient => selectedIngredients
-        .includes(ingredient) && recipe.ingredients.length === selectedIngredients.length))
-
-export const dishesWithoutOneHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) =>
-    recipes.reduce((acc, recipe) => {
-        if (recipe.ingredients.length < 2 || recipe.ingredients.length !== selectedIngredients.length + 1) {
+export const dishesWithoutOneHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) => recipes
+    .reduce((acc, recipe) => {
+        if (recipe.ingredients.length === 1 || recipe.ingredients.length !== selectedIngredients.length + 1) {
             return acc
         }
 
