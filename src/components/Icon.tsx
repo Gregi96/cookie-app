@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTheme } from 'lib/hooks'
 import { SvgIcon } from 'lib/types'
 
 export const Icon: React.FunctionComponent<SvgIcon> = ({
@@ -9,19 +10,23 @@ export const Icon: React.FunctionComponent<SvgIcon> = ({
     viewBox,
     children,
     onClick
-}) => (
-    <svg
-        role="svg"
-        width={width}
-        height={height}
-        onClick={onClick}
-        fill={fill || 'black'}
-        viewBox={viewBox || '0 0 24 24'}
-        style={{
-            cursor: (pointer || onClick) ? 'pointer' : undefined
-        }}
+}) => {
+    const theme = useTheme()
 
-    >
-        {children}
-    </svg>
-)
+    return (
+        <svg
+            role="svg"
+            width={width}
+            height={height}
+            onClick={onClick}
+            fill={fill || theme.colors.black}
+            viewBox={viewBox || '0 0 24 24'}
+            style={{
+                cursor: (pointer || onClick) ? 'pointer' : undefined
+            }}
+
+        >
+            {children}
+        </svg>
+    )
+}

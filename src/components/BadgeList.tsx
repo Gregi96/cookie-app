@@ -18,7 +18,7 @@ export const BadgeList: React.FunctionComponent<BadgeListProps> = ({
             {title}
         </Title>
         <BadgeContainer>
-            {items.length > 0 && items.map(ingredient => (
+            {items.map(ingredient => (
                 <Badge key={ingredient}>
                     {ingredient}
                     <RemoveIcon>

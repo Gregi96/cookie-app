@@ -35,7 +35,7 @@ export const Recipes: React.FunctionComponent = () => {
                                 value={recipeName}
                                 onChange={event => setRecipeName(event.target.value)}
                             />
-                            {selectedIngredients.length > 0 && recipeName.length > 0 && (
+                            {selectedIngredients.length > 0 && recipeName && (
                                 <Button
                                     onClick={() => {
                                         addNewRecipe(recipeName)

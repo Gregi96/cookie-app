@@ -2,12 +2,12 @@ import { Dictionary } from 'lib/types'
 
 export const pl_PL: Dictionary = {
     appName: 'React video aplikacja',
-    ingredients: 'Skladniki',
-    addIngredientPlaceholder: 'Wpisz tutaj nazwe skladnika...',
+    ingredients: 'Składniki',
+    addIngredientPlaceholder: 'Wpisz tutaj nazwę składnika...',
     recipes: 'Przepisy',
-    nameOfRecipe: 'Nazwa skladnika',
-    selectedIngredients: 'Wybrane skladniki',
-    searchIngredients: 'Wyszukaj skladniki',
+    nameOfRecipe: 'Nazwa składnika',
+    selectedIngredients: 'Wybrane składniki',
+    searchIngredients: 'Wyszukaj składniki',
     dishes: 'Dania',
     add: 'Dodaj'
 }
