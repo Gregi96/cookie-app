@@ -1,12 +1,12 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme } from 'lib/styles'
-import { renderRoutes } from 'lib/routing'
+import { ScreenLayout } from 'components/ScreenLayout'
 
 export const App = () => (
     <ThemeProvider theme={theme}>
         <AppContainer>
-            {renderRoutes()}
+            <ScreenLayout/>
         </AppContainer>
     </ThemeProvider>
 )

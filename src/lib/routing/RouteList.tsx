@@ -1,20 +1,20 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Home } from 'components'
-import { ScreenNames } from 'lib/routing'
+import { ScreenNames, ROUTES } from 'lib/routing'
 
 export const renderRoutes = () => (
     <Routes>
-        <Route
-            path={ScreenNames.Home}
-            element={(
-                <Home/>
-            )}
-        />
+        {ROUTES.map(item => (
+            <Route
+                key={item.path}
+                path={item.path}
+                element={item.element}
+            />
+        ))}
         <Route
             path={'*'}
             element={(
-                <Navigate to={'/'}/>
+                <Navigate to={ScreenNames.Ingredients}/>
             )}
         />
     </Routes>

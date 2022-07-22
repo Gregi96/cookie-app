@@ -1,3 +1,5 @@
 export enum ScreenNames {
-    Home = '/'
+    Ingredients = '/ingredients',
+    Recipes = '/recipes',
+    Dishes = '/dishes'
 }
