@@ -6,12 +6,11 @@ type DishesWithExactIngredientsProps = {
     selectedIngredients: Array<string>
 }
 
-export const dishesWithExactIngredientsHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) => recipes
+export const dishesWithExactIngredientsHelper = ({ recipes, selectedIngredients }: DishesWithExactIngredientsProps) => recipes
     .filter(recipe => recipe.ingredients
-        .every(ingredient => selectedIngredients
-            .includes(ingredient) && recipe.ingredients.length === selectedIngredients.length))
+        .every(ingredient => selectedIngredients.includes(ingredient)))
 
-export const dishesWithoutOneHelper = ({ recipes, selectedIngredients } : DishesWithExactIngredientsProps) => recipes
+export const dishesWithoutOneHelper = ({ recipes, selectedIngredients }: DishesWithExactIngredientsProps) => recipes
     .reduce((acc, recipe) => {
         if (recipe.ingredients.length === 1 || recipe.ingredients.length !== selectedIngredients.length + 1) {
             return acc
