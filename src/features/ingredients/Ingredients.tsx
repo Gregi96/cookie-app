@@ -67,25 +67,6 @@ const AddContainer = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 4px;
-  }
-  button {
-      width: 35px;
-      height: 35px;
-      margin-left: 5px;
-      background-color: ${({ theme }) => theme.colors.bisque};
-      border-radius: 50%;
-      border: 1px solid ${({ theme }) => theme.colors.brown};
-      cursor: pointer;
-      &:hover {
-          background-color: ${({ theme }) => theme.colors.brown};
-          color: ${({ theme }) => theme.colors.white};
-          border-color: ${({ theme }) => theme.colors.white};
-    }
-  }
 `
 
 const Ingredient = styled.div`
