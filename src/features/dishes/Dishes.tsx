@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
-import { AddRecipeProps, useCookieStore, useTranslationStore } from 'lib/stores'
+import { useCookieStore, useTranslationStore } from 'lib/stores'
 import { useRecipeActions } from 'lib/hooks'
 import { Title } from 'lib/styles'
 import { InputWithDropdown, BadgeList } from 'lib/components'
 import { dishesWithExactIngredientsHelper, dishesWithoutOneHelper } from './utils'
-import { DishesWithoutOneIngredientProps } from './types'
 
 export const Dishes: React.FunctionComponent = () => {
     const { T } = useTranslationStore()
     const { recipes } = useCookieStore()
-    const [proposalDishes, setProposalDishes] = useState<Array<AddRecipeProps>>([])
-    const [dishesWithoutOneIngredient, setDishesWithoutOneIngredient] = useState<Array<DishesWithoutOneIngredientProps>>([])
 
     const {
         addIngredient,
@@ -20,19 +17,15 @@ export const Dishes: React.FunctionComponent = () => {
         removeIngredient
     } = useRecipeActions()
 
-    useEffect(() => {
-        const dishesWithExactIngredients = dishesWithExactIngredientsHelper({
-            selectedIngredients,
-            recipes
-        })
-        const dishesWithoutOne = dishesWithoutOneHelper({
-            selectedIngredients,
-            recipes
-        })
+    const proposalDishes = useMemo(() => dishesWithExactIngredientsHelper({
+        selectedIngredients,
+        recipes
+    }), [selectedIngredients])
 
-        setProposalDishes(dishesWithExactIngredients)
-        setDishesWithoutOneIngredient(dishesWithoutOne)
-    }, [selectedIngredients])
+    const dishesWithoutOneIngredient = useMemo(() => dishesWithoutOneHelper({
+        selectedIngredients,
+        recipes
+    }), [selectedIngredients])
 
     return (
         <div>
