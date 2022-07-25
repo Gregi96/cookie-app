@@ -7,8 +7,7 @@ type DishesWithExactIngredientsProps = {
 }
 
 export const dishesWithExactIngredientsHelper = ({ recipes, selectedIngredients }: DishesWithExactIngredientsProps) => recipes
-    .filter(recipe => recipe.ingredients
-        .every(ingredient => selectedIngredients.includes(ingredient)))
+    .filter(recipe => recipe.ingredients.every(ingredient => selectedIngredients.includes(ingredient)))
 
 export const dishesWithoutOneHelper = ({ recipes, selectedIngredients }: DishesWithExactIngredientsProps) => recipes
     .reduce((acc, recipe) => {
