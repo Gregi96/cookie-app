@@ -85,12 +85,12 @@ const InputStyle = styled.input`
 
 const InputContainer = styled.div`
     width: 100%;
+    display: flex;
+    align-items: center;
     position: relative;
 `
 
 const CloseWrapper = styled.div`
     position: absolute;
     right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
 `
