@@ -15,7 +15,11 @@ export const Recipes: React.FunctionComponent = () => {
         addNewRecipe,
         recipes,
         options,
-        deleteRecipe
+        deleteRecipe,
+        optionalOptions,
+        addOptionalIngredient,
+        selectedOptionalIngredients,
+        removeOptionalIngredient
     } = useRecipeActions()
 
     return (
@@ -24,7 +28,7 @@ export const Recipes: React.FunctionComponent = () => {
                 {T.recipes}
             </Title>
             <Container>
-                <LeftContainer>
+                <FieldContainer>
                     <Label>
                         {T.nameOfRecipe}
                         <InputWithButton>
@@ -32,7 +36,8 @@ export const Recipes: React.FunctionComponent = () => {
                                 value={recipeName}
                                 onChange={event => setRecipeName(event.target.value)}
                             />
-                            {selectedIngredients.length > 0 && recipeName && (
+                            {(selectedIngredients.length > 0 || selectedOptionalIngredients.length > 0) &&
+                                recipeName && (
                                 <Button
                                     onClick={() => {
                                         addNewRecipe(recipeName)
@@ -43,20 +48,32 @@ export const Recipes: React.FunctionComponent = () => {
                             )}
                         </InputWithButton>
                     </Label>
-                    <BadgeList
-                        items={selectedIngredients}
-                        title={T.selectedIngredients}
-                        removeBadge={removeIngredient}
-                    />
-                </LeftContainer>
-                <RightContainer>
+                </FieldContainer>
+                <FieldContainer>
                     {T.searchIngredients}
                     <InputWithDropdown
                         options={options}
                         selectOption={addIngredient}
                     />
-                </RightContainer>
+                </FieldContainer>
+                <FieldContainer>
+                    {T.optionalIngredients}
+                    <InputWithDropdown
+                        options={optionalOptions}
+                        selectOption={addOptionalIngredient}
+                    />
+                </FieldContainer>
             </Container>
+            <BadgeList
+                items={selectedIngredients}
+                title={T.selectedIngredients}
+                removeBadge={removeIngredient}
+            />
+            <BadgeList
+                items={selectedOptionalIngredients}
+                title={T.selectedOptionalIngredients}
+                removeBadge={removeOptionalIngredient}
+            />
             <RecipesList
                 recipes={recipes}
                 removeRecipe={deleteRecipe}
@@ -68,6 +85,7 @@ export const Recipes: React.FunctionComponent = () => {
 const Container = styled.div`
     display: flex;
     align-items: start;
+    flex-wrap: wrap;
 `
 
 const Label = styled.label`
@@ -80,21 +98,17 @@ const Input = styled.input`
 `
 
 const InputWithButton = styled.div`
+    display: flex;
+    align-items: center;
     position: relative;
     button {
       position: absolute;
-      top: 0;
       right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
     }
 `
 
-const LeftContainer = styled.div`
-    width: 100%;
-`
-
-const RightContainer = styled.div`
-    width: 100%;
+const FieldContainer = styled.div`
+    width: 50%;
+    margin-bottom: 10px;
 `
 

@@ -4,7 +4,8 @@ import { LocalStorageKey } from 'lib/types'
 
 export interface AddRecipeProps {
     recipeName: string,
-    ingredients: Array<string>
+    ingredients: Array<string>,
+    optionalIngredients: Array<string>
 }
 
 const ingredientsAtom = atomWithStorage<Array<string>>(LocalStorageKey.Ingredients, [])
@@ -18,9 +19,10 @@ export const useCookieStore = () => {
 
     const removeIngredient = (ingredient: string) => setIngredients(prev => prev.filter(ingredientInStore => ingredientInStore !== ingredient))
 
-    const addRecipe = ({ recipeName, ingredients } : AddRecipeProps) => setRecipes(prev => prev.concat({
+    const addRecipe = ({ recipeName, ingredients, optionalIngredients }: AddRecipeProps) => setRecipes(prev => prev.concat({
         recipeName,
-        ingredients
+        ingredients,
+        optionalIngredients
     }))
 
     const removeRecipe = (recipeName: string) => setRecipes(prev => prev.filter(recipe => recipe.recipeName !== recipeName))

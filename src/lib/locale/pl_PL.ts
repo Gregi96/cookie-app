@@ -12,5 +12,7 @@ export const pl_PL: Dictionary = {
     add: 'Dodaj',
     searchedDishes: 'Co mogę zrobić z wybranymi składnikami:',
     dishesWithoutOne: 'Co mogę zrobić z wybranymi składnikami oprócz jednego:',
-    missingIngredient: 'brakujący składnik'
+    missingIngredient: 'brakujący składnik',
+    selectedOptionalIngredients: 'wybrane opcjonalne składniki',
+    optionalIngredients: 'opcjonalne składniki'
 }

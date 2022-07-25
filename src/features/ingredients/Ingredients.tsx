@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Icons } from 'assets'
 import { useCookieStore, useTranslationStore } from 'lib/stores'
@@ -8,12 +8,27 @@ import { Input, IconButton } from 'lib/components'
 export const Ingredients: React.FunctionComponent = () => {
     const [ingredientValue, setIngredientValue] = useState('')
     const { ingredients, removeIngredient, addIngredient } = useCookieStore()
+    const lastElementRef = useRef<null | HTMLDivElement>(null)
+    const [scrollDownFlag, setScrollDownFlag] = useState(false)
+    const isFirstRender = useRef(true)
     const { T } = useTranslationStore()
 
     const handleAddIngredient = () => {
         addIngredient(ingredientValue)
         setIngredientValue('')
+        setScrollDownFlag(prev => !prev)
     }
+
+    useEffect(() => {
+        if (!isFirstRender.current && lastElementRef.current) {
+            lastElementRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [scrollDownFlag])
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false
+        }
+    }, [])
 
     return (
         <InnerContainer>
@@ -37,7 +52,7 @@ export const Ingredients: React.FunctionComponent = () => {
                     )}
                 />
             </AddContainer>
-            <div>
+            <IngredientContainer>
                 {ingredients.map(ingredient => (
                     <Ingredient key={ingredient}>
                         {ingredient}
@@ -52,7 +67,8 @@ export const Ingredients: React.FunctionComponent = () => {
                         />
                     </Ingredient>
                 ))}
-            </div>
+                <div ref={lastElementRef}/>
+            </IngredientContainer>
         </InnerContainer>
     )
 }
@@ -67,6 +83,11 @@ const AddContainer = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+`
+
+const IngredientContainer = styled.div`
+    max-height: 500px;
+    overflow-y: auto;
 `
 
 const Ingredient = styled.div`
