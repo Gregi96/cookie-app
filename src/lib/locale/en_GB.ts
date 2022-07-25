@@ -9,5 +9,7 @@ export const en_GB: Dictionary = {
     selectedIngredients: 'Selected ingredients',
     searchIngredients: 'Search ingredients',
     dishes: 'Dishes',
-    add: 'Add'
+    add: 'Add',
+    searchedDishes: 'What can I make with selected ingredients:',
+    dishesWithoutOne: 'What can I make with selected ingredients with missing one ingredient:'
 }

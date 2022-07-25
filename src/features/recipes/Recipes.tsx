@@ -3,10 +3,7 @@ import styled from 'styled-components'
 import { useTranslationStore } from 'lib/stores'
 import { Title } from 'lib/styles'
 import { useRecipeActions } from 'lib/hooks'
-import { BadgeList } from './BadgeList'
-import { RecipesList } from './RecipesList'
-import { InputWithDropdown } from './InputWithDropdown'
-import { Button } from './Button'
+import { BadgeList, RecipesList, InputWithDropdown, Button } from 'lib/components'
 
 export const Recipes: React.FunctionComponent = () => {
     const { T } = useTranslationStore()
@@ -46,13 +43,11 @@ export const Recipes: React.FunctionComponent = () => {
                             )}
                         </InputWithButton>
                     </Label>
-                    {selectedIngredients.length > 0 && (
-                        <BadgeList
-                            items={selectedIngredients}
-                            title={T.selectedIngredients}
-                            removeBadge={removeIngredient}
-                        />
-                    )}
+                    <BadgeList
+                        items={selectedIngredients}
+                        title={T.selectedIngredients}
+                        removeBadge={removeIngredient}
+                    />
                 </LeftContainer>
                 <RightContainer>
                     {T.searchIngredients}
@@ -62,12 +57,10 @@ export const Recipes: React.FunctionComponent = () => {
                     />
                 </RightContainer>
             </Container>
-            {recipes.length > 0 && (
-                <RecipesList
-                    recipes={recipes}
-                    removeRecipe={deleteRecipe}
-                />
-            )}
+            <RecipesList
+                recipes={recipes}
+                removeRecipe={deleteRecipe}
+            />
         </div>
     )
 }

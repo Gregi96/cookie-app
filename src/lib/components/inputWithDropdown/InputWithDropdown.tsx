@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Input } from './Input'
+import { Input } from 'lib/components'
 
 type InputWithDropdownProps = {
     options: Array<string>,
@@ -59,16 +59,12 @@ const Dropdown = styled.div`
     left: 0;
     border: 1px solid ${({ theme }) => theme.colors.red};
     background-color: ${({ theme }) => theme.colors.white};
+    z-index: 1;
 `
 
 const Container = styled.div`
     width: 100%;
     position: relative;
-`
-
-const InputOld = styled.input`
-    width: 100%;
-    padding: 10px;
 `
 
 const DropdownItem = styled.div`
