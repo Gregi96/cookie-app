@@ -21,7 +21,6 @@ export const Dishes: React.FunctionComponent = () => {
         selectedIngredients,
         recipes
     }), [selectedIngredients])
-
     const dishesWithoutOneIngredient = useMemo(() => dishesWithoutOneHelper({
         selectedIngredients,
         recipes
