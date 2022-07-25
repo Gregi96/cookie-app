@@ -16,6 +16,8 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
 
     const filterDropdownOption = (value: string) => {
         if (value === '') {
+            setIngredientValue(value)
+
             return setDropdownOption([])
         }
 
@@ -31,6 +33,7 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
                 value={ingredientValue}
                 onChange={filterDropdownOption}
                 withDebounce
+                clearIcon
             />
             {dropdownOption.length > 0 && (
                 <Dropdown>
@@ -59,6 +62,8 @@ const Dropdown = styled.div`
     left: 0;
     border: 1px solid ${({ theme }) => theme.colors.red};
     background-color: ${({ theme }) => theme.colors.white};
+    max-height: 314px;
+    overflow-y: auto;
     z-index: 1;
 `
 

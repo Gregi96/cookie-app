@@ -4,6 +4,7 @@ import { useCookieStore, useTranslationStore } from 'lib/stores'
 import { useRecipeActions } from 'lib/hooks'
 import { Title } from 'lib/styles'
 import { InputWithDropdown, BadgeList } from 'lib/components'
+import { DishCard } from './components'
 import { dishesWithExactIngredientsHelper, dishesWithoutOneHelper } from './utils'
 
 export const Dishes: React.FunctionComponent = () => {
@@ -42,18 +43,21 @@ export const Dishes: React.FunctionComponent = () => {
             />
             <DishesContainer>
                 {T.searchedDishes}
-                {proposalDishes.map(dishes => (
-                    <div key={dishes.recipeName}>
-                        {dishes.recipeName}
-                    </div>
+                {proposalDishes.map(dish => (
+                    <DishCard
+                        key={dish.recipeName}
+                        dish={dish}
+                    />
                 ))}
             </DishesContainer>
             <DishesContainer>
                 {T.dishesWithoutOne}
-                {dishesWithoutOneIngredient.map(dishes => (
-                    <div key={dishes.recipeName}>
-                        {dishes.recipeName}
-                    </div>
+                {dishesWithoutOneIngredient.map(dish => (
+                    <DishCard
+                        key={dish.recipeName}
+                        dish={dish}
+                        missingIngredient={dish.missingIngredient}
+                    />
                 ))}
             </DishesContainer>
         </div>
@@ -61,5 +65,5 @@ export const Dishes: React.FunctionComponent = () => {
 }
 
 const DishesContainer = styled.div`
-    margin-top: 150px;
+    margin-top: 50px;
 `

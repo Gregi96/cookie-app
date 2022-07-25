@@ -11,5 +11,6 @@ export const pl_PL: Dictionary = {
     dishes: 'Dania',
     add: 'Dodaj',
     searchedDishes: 'Co mogę zrobić z wybranymi składnikami:',
-    dishesWithoutOne: 'Co mogę zrobić z wybranymi składnikami oprócz jednego:'
+    dishesWithoutOne: 'Co mogę zrobić z wybranymi składnikami oprócz jednego:',
+    missingIngredient: 'brakujący składnik'
 }

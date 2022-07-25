@@ -9,5 +9,6 @@ export type Dictionary = {
     dishes: string,
     add: string,
     searchedDishes: string,
-    dishesWithoutOne: string
+    dishesWithoutOne: string,
+    missingIngredient: string
 }
