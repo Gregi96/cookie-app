@@ -8,7 +8,7 @@ type InputProps = {
     placeholder?: string,
     withDebounce?: boolean,
     clearIcon?: boolean,
-    isOpenDropdown?: VoidFunction,
+    onClick?: VoidFunction,
     onChange(value: string): void
 }
 
@@ -18,7 +18,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
     value,
     placeholder,
     clearIcon,
-    isOpenDropdown
+    onClick
 }) => {
     const inputChange = useMemo(() => new Subject<string>(), [])
     const onChangeRef = useRef(onChange)
@@ -53,7 +53,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
             <InputStyle
                 value={withDebounce ? inputValue : value}
                 placeholder={placeholder}
-                onClick={isOpenDropdown}
+                onClick={onClick}
                 onChange={event => {
                     setInputValue(event.target.value)
 

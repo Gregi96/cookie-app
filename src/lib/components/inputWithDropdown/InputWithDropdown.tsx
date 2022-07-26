@@ -18,7 +18,7 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
     const nodeRef = useRef<HTMLDivElement>(null)
 
     useClickOutside({
-        outsideClick: () => {
+        onClickOutside: () => {
             setIsOpen(false)
             setIngredientValue('')
             setDropdownOption([])
@@ -46,7 +46,7 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
                 onChange={filterDropdownOption}
                 withDebounce
                 clearIcon
-                isOpenDropdown={() => setIsOpen(true)}
+                onClick={() => setIsOpen(true)}
             />
             {isOpen && dropdownOption.length > 0 && (
                 <Dropdown>
