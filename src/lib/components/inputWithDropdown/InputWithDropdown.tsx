@@ -16,6 +16,7 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
     const [ingredientValue, setIngredientValue] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const nodeRef = useRef<HTMLDivElement>(null)
+
     useClickOutside({
         outsideClick: () => {
             setIsOpen(false)
