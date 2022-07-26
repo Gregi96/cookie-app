@@ -71,9 +71,9 @@ export const Ingredients: React.FunctionComponent = () => {
                         <motion.div
                             key={ingredient}
                             variants={animateIngredientItem}
-                            initial={'initial'}
-                            animate={'animate'}
-                            exit={'exit'}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
                         >
                             <Ingredient key={ingredient}>
                                 {ingredient}

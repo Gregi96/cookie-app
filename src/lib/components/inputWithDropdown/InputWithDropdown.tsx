@@ -86,9 +86,9 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
                 {dropdownOption.length > 0 && (
                     <motion.div
                         variants={animateDropdownContainer}
-                        initial={'initial'}
-                        animate={'open'}
-                        exit={'exit'}
+                        initial="initial"
+                        animate="open"
+                        exit="exit"
                     >
                         <Dropdown>
                             <AnimatePresence>
@@ -96,9 +96,9 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
                                     <motion.div
                                         variants={animateItem}
                                         key={item}
-                                        initial={'initial'}
-                                        animate={'animate'}
-                                        exit={'exit'}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
                                     >
                                         <DropdownItem
                                             key={item}
