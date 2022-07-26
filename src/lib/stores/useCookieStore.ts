@@ -1,6 +1,7 @@
 import { useAtom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 import { LocalStorageKey } from 'lib/types'
+import { useState } from 'react'
 
 export interface AddRecipeProps {
     recipeName: string,
@@ -11,11 +12,22 @@ export interface AddRecipeProps {
 const ingredientsAtom = atomWithStorage<Array<string>>(LocalStorageKey.Ingredients, [])
 const recipesAtom = atomWithStorage<Array<AddRecipeProps>>(LocalStorageKey.Recipes, [])
 
-export const useCookieStore = () => {
+export const useCookieStore = (onSuccess: VoidFunction) => {
     const [ ingredients, setIngredients ] = useAtom(ingredientsAtom)
     const [ recipes, setRecipes ] = useAtom(recipesAtom)
+    const [hasError, setHasError] = useState(false)
 
-    const addIngredient = (ingredient: string) => setIngredients(prev => [...prev, ingredient])
+    const addIngredient = (ingredient: string) => {
+        const checkIfIngredientExist = ingredients.find(ingredientInStore => ingredientInStore === ingredient)
+
+        if (checkIfIngredientExist) {
+            return setHasError(true)
+        }
+
+        setIngredients(prev => [...prev, ingredient])
+        setHasError(false)
+        onSuccess()
+    }
 
     const removeIngredient = (ingredient: string) => setIngredients(prev => prev.filter(ingredientInStore => ingredientInStore !== ingredient))
 
@@ -33,6 +45,7 @@ export const useCookieStore = () => {
         removeIngredient,
         addRecipe,
         recipes,
-        removeRecipe
+        removeRecipe,
+        hasError
     }
 }

@@ -12,5 +12,6 @@ export type Dictionary = {
     searchedDishes: string,
     dishesWithoutOne: string,
     missingIngredient: string,
-    optionalIngredients: string
+    optionalIngredients: string,
+    errorIngredientMessage: string
 }

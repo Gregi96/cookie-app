@@ -7,15 +7,16 @@ import { Input, IconButton } from 'lib/components'
 
 export const Ingredients: React.FunctionComponent = () => {
     const [ingredientValue, setIngredientValue] = useState('')
-    const { ingredients, removeIngredient, addIngredient } = useCookieStore()
+    const { ingredients, removeIngredient, addIngredient, hasError } = useCookieStore(() => {
+        setIngredientValue('')
+        setScrollDownFlag(prev => !prev)
+    })
     const lastElementRef = useRef<null | HTMLDivElement>(null)
     const [scrollDownFlag, setScrollDownFlag] = useState(false)
     const { T } = useTranslationStore()
 
     const handleAddIngredient = () => {
         addIngredient(ingredientValue)
-        setIngredientValue('')
-        setScrollDownFlag(prev => !prev)
     }
 
     useEffect(() => {
@@ -46,6 +47,11 @@ export const Ingredients: React.FunctionComponent = () => {
                     )}
                 />
             </AddContainer>
+            {hasError && (
+                <ErrorMessage>
+                    {T.errorIngredientMessage}
+                </ErrorMessage>
+            )}
             <IngredientContainer>
                 {ingredients.map(ingredient => (
                     <Ingredient key={ingredient}>
@@ -94,4 +100,9 @@ const Ingredient = styled.div`
     border: 1px solid ${({ theme }) => theme.colors.brown};
     margin-bottom: 10px;
     color: ${({ theme }) => theme.colors.darkgray};
+`
+
+const ErrorMessage = styled.div`
+    color: ${({ theme }) => theme.colors.red};
+    margin-bottom: 20px;
 `
