@@ -14,5 +14,6 @@ export const en_GB: Dictionary = {
     dishesWithoutOne: 'What can I make with selected ingredients with missing one ingredient:',
     missingIngredient: 'missing ingredient:',
     selectedOptionalIngredients: 'Selected optional ingredients',
-    optionalIngredients: 'Optional ingredients'
+    optionalIngredients: 'Optional ingredients',
+    errorIngredientMessage: 'Entered ingredient already exist'
 }
