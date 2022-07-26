@@ -10,7 +10,6 @@ export const Ingredients: React.FunctionComponent = () => {
     const { ingredients, removeIngredient, addIngredient } = useCookieStore()
     const lastElementRef = useRef<null | HTMLDivElement>(null)
     const [scrollDownFlag, setScrollDownFlag] = useState(false)
-    const isFirstRender = useRef(true)
     const { T } = useTranslationStore()
 
     const handleAddIngredient = () => {
@@ -20,15 +19,10 @@ export const Ingredients: React.FunctionComponent = () => {
     }
 
     useEffect(() => {
-        if (!isFirstRender.current && lastElementRef.current) {
+        if (lastElementRef.current && scrollDownFlag) {
             lastElementRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [scrollDownFlag])
-    useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false
-        }
-    }, [])
 
     return (
         <InnerContainer>
