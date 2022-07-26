@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Input } from 'lib/components'
+import { useClickOutside } from 'lib/hooks'
 
 type InputWithDropdownProps = {
     options: Array<string>,
@@ -13,6 +14,16 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
 }) => {
     const [dropdownOption, setDropdownOption] = useState<Array<string>>([])
     const [ingredientValue, setIngredientValue] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+    const nodeRef = useRef<HTMLDivElement>(null)
+    useClickOutside({
+        handler: () => {
+            setIsOpen(false)
+            setIngredientValue('')
+            setDropdownOption([])
+        },
+        ref: nodeRef
+    })
 
     const filterDropdownOption = (value: string) => {
         if (value === '') {
@@ -28,14 +39,15 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
     }
 
     return (
-        <Container>
+        <Container ref={nodeRef}>
             <Input
                 value={ingredientValue}
                 onChange={filterDropdownOption}
                 withDebounce
                 clearIcon
+                isOpen={() => setIsOpen(true)}
             />
-            {dropdownOption.length > 0 && (
+            {isOpen && dropdownOption.length > 0 && (
                 <Dropdown>
                     {dropdownOption.map((item => (
                         <DropdownItem
