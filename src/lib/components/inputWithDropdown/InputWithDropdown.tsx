@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Input } from 'lib/components'
 import { useClickOutside } from 'lib/hooks'
 
@@ -19,7 +20,6 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
 
     useClickOutside({
         onClickOutside: () => {
-            setIsOpen(false)
             setIngredientValue('')
             setDropdownOption([])
         },
@@ -39,6 +39,41 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
         setDropdownOption(filteredValue)
     }
 
+    const animateDropdownContainer = {
+        open: {
+            opacity: 1,
+            y: '20px' ,
+            display: 'block'
+        },
+        initial: {
+            display: 'none',
+            opacity: 1,
+            y: '5px'
+        },
+        exit: {
+            opacity: 0,
+            y: '5px',
+            transitionEnd: {
+                display: 'none'
+            }
+        }
+    }
+
+    const animateItem = {
+        initial: {
+            opacity: 0,
+            height: 0
+        },
+        exit: {
+            height: 0,
+            opacity: 0
+        },
+        animate: {
+            opacity: 1,
+            height: '26px'
+        }
+    }
+
     return (
         <Container ref={nodeRef}>
             <Input
@@ -46,24 +81,42 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
                 onChange={filterDropdownOption}
                 withDebounce
                 clearIcon
-                onClick={() => setIsOpen(true)}
             />
-            {isOpen && dropdownOption.length > 0 && (
-                <Dropdown>
-                    {dropdownOption.map((item => (
-                        <DropdownItem
-                            key={item}
-                            onClick={() => {
-                                selectOption(item)
-                                setDropdownOption([])
-                                setIngredientValue('')
-                            }}
-                        >
-                            {item}
-                        </DropdownItem>
-                    )))}
-                </Dropdown>
-            )}
+            <AnimatePresence>
+                {dropdownOption.length > 0 && (
+                    <motion.div
+                        variants={animateDropdownContainer}
+                        initial="initial"
+                        animate="open"
+                        exit="exit"
+                    >
+                        <Dropdown>
+                            <AnimatePresence>
+                                {dropdownOption.map((item => (
+                                    <motion.div
+                                        variants={animateItem}
+                                        key={item}
+                                        initial="initial"
+                                        animate="animate"
+                                        exit="exit"
+                                    >
+                                        <DropdownItem
+                                            key={item}
+                                            onClick={() => {
+                                                selectOption(item)
+                                                setDropdownOption([])
+                                                setIngredientValue('')
+                                            }}
+                                        >
+                                            {item}
+                                        </DropdownItem>
+                                    </motion.div>
+                                )))}
+                            </AnimatePresence>
+                        </Dropdown>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </Container>
     )
 }
@@ -71,7 +124,6 @@ export const InputWithDropdown: React.FunctionComponent<InputWithDropdownProps> 
 const Dropdown = styled.div`
     width: 100%;
     position: absolute;
-    top: 60px;
     left: 0;
     border: 1px solid ${({ theme }) => theme.colors.red};
     background-color: ${({ theme }) => theme.colors.white};

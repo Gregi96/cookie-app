@@ -53,6 +53,7 @@ const Badge = styled.div`
     padding: 5px 10px;
     margin-right: 15px;
     border-radius: 7px;
+    z-index: -1;
 `
 
 const RemoveIcon = styled.div`

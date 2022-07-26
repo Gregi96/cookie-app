@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Icons } from 'assets'
 import { useCookieStore, useTranslationStore } from 'lib/stores'
 import { Title } from 'lib/styles'
@@ -24,6 +25,24 @@ export const Ingredients: React.FunctionComponent = () => {
             lastElementRef.current.scrollIntoView({ behavior: 'smooth' })
         }
     }, [scrollDownFlag])
+
+    const animateIngredientItem = {
+        initial: {
+            opacity: 1,
+            height: '40px',
+            scale: 0.7
+        },
+        animate: {
+            opacity: 1,
+            height:  '60px',
+            scale: 1
+        },
+        exit: {
+            opacity: 0,
+            height: 0,
+            scale: 0
+        }
+    }
 
     return (
         <InnerContainer>
@@ -53,20 +72,30 @@ export const Ingredients: React.FunctionComponent = () => {
                 </ErrorMessage>
             )}
             <IngredientContainer>
-                {ingredients.map(ingredient => (
-                    <Ingredient key={ingredient}>
-                        {ingredient}
-                        <IconButton
-                            icon={(
-                                <Icons.Bin
-                                    width={24}
-                                    height={24}
-                                    onClick={() => removeIngredient(ingredient)}
+                <AnimatePresence>
+                    {ingredients.map(ingredient => (
+                        <motion.div
+                            key={ingredient}
+                            variants={animateIngredientItem}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                        >
+                            <Ingredient key={ingredient}>
+                                {ingredient}
+                                <IconButton
+                                    icon={(
+                                        <Icons.Bin
+                                            width={24}
+                                            height={24}
+                                            onClick={() => removeIngredient(ingredient)}
+                                        />
+                                    )}
                                 />
-                            )}
-                        />
-                    </Ingredient>
-                ))}
+                            </Ingredient>
+                        </motion.div>
+                    ))}
+                </AnimatePresence>
                 <div ref={lastElementRef}/>
             </IngredientContainer>
         </InnerContainer>
