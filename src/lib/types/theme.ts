@@ -7,6 +7,7 @@ export type AppTheme = {
         white: string,
         darkgray: string,
         red: string,
-        black: string
+        black: string,
+        burlywood: string
     }
 }

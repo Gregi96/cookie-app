@@ -22,16 +22,28 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({
                     <RecipeName>
                         {recipe.recipeName}
                     </RecipeName>
-                    <Ingredients>
-                        <div>
-                            {T.ingredients}:
-                        </div>
-                        {recipe.ingredients.map(ingredient => (
-                            <Ingredient key={ingredient}>
-                                {ingredient}
-                            </Ingredient>
-                        ))}
-                    </Ingredients>
+                    <IngredientsContainer>
+                        <Ingredients>
+                            <div>
+                                {T.ingredients}:
+                            </div>
+                            {recipe.ingredients.map(ingredient => (
+                                <Ingredient key={ingredient}>
+                                    {ingredient}
+                                </Ingredient>
+                            ))}
+                        </Ingredients>
+                        {recipe.optionalIngredients.length > 0 && (
+                            <OptionalIngredients>
+                                {T.optionalIngredients}
+                                {recipe.optionalIngredients.map(ingredient => (
+                                    <Ingredient key={ingredient}>
+                                        {ingredient}
+                                    </Ingredient>
+                                ))}
+                            </OptionalIngredients>
+                        )}
+                    </IngredientsContainer>
                     <RemoveRecipeWrapper>
                         <IconButton
                             icon={(
@@ -51,13 +63,20 @@ export const RecipesList: React.FunctionComponent<RecipeListProps> = ({
 
 const Recipe = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     padding: 10px;
-    background-color: bisque;
+    background-color: ${({ theme }) => theme.colors.bisque};
     margin-top: 10px;
 `
 
 const RecipeName = styled.div`
     width: 20%;
+    background-color: ${({ theme }) => theme.colors.burlywood};
+    padding: 5px 10px;
+    margin-right: 30px;
+    border-radius: 5px;
+    align-self: flex-start;
 `
 
 const Ingredients = styled.div`
@@ -70,4 +89,15 @@ const Ingredient = styled.div`
 
 const RemoveRecipeWrapper = styled.div`
     margin-left: auto;
+`
+
+const OptionalIngredients = styled.div`
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+`
+
+const IngredientsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `

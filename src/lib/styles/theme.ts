@@ -9,6 +9,7 @@ export const theme: AppTheme = {
         white: 'white',
         darkgray: 'darkgray',
         red: 'red',
-        black: 'black'
+        black: 'black',
+        burlywood: 'burlywood'
     }
 }

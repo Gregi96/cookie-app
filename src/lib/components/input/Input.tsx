@@ -1,9 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { debounceTime, Subject } from 'rxjs'
 import { Icons } from 'assets'
-
-const inputChange = new Subject<string>()
 
 type InputProps = {
     value: string,
@@ -20,6 +18,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
     placeholder,
     clearIcon
 }) => {
+    const inputChange = useMemo(() => new Subject<string>(), [])
     const onChangeRef = useRef(onChange)
     const [inputValue, setInputValue] = useState('')
 
