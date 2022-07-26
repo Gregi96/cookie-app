@@ -1,23 +1,21 @@
 import { useEffect, MouseEvent, RefObject } from 'react'
 
-type useClickOutsideProps<T> = {
-    handler: VoidFunction,
+type UseClickOutsideProps<T> = {
+    outsideClick: VoidFunction,
     ref: RefObject<T>
 }
 
-export const useClickOutside = <T extends HTMLElement = HTMLElement>({ handler, ref }: useClickOutsideProps<T>) => {
+export const useClickOutside = <T extends HTMLElement>({ outsideClick, ref }: UseClickOutsideProps<T>) => {
     useEffect(() => {
-        const clickOutside = (ev: MouseEvent) => {
-            if (ref.current && !ref.current.contains(ev.target as Node)) {
-                handler()
+        const clickOutside = (event: Event) => {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                outsideClick()
             }
         }
 
-        // @ts-ignore
         window.addEventListener('mousedown', clickOutside, true)
 
         return () => {
-            // @ts-ignore
             window.removeEventListener('mousedown', clickOutside, true)
         }
     }, [])
